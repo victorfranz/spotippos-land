@@ -13,7 +13,6 @@ object Boot extends App {
   implicit val system = ActorSystem("spotippos")
   implicit val executionContext = system.dispatcher
 
-  ApotipposWorld.registry.loadSample()
   SimpleApotipposWorld.registry.loadSample()
 
   val apiRouter = system.actorOf(Props[ApiRouter], "ApiRouter")
