@@ -90,7 +90,7 @@ class ApotipposWorldRouterSpec extends Specification with Specs2RouteTest with M
                     |  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     |  "price": 1250000,
                     |  "baths": 3,
-                    |  "title": "Imóvel código 1, com 5 quartos e 4 banheiros",
+                    |  "title": "Imovel codigo 1, com 5 quartos e 4 banheiros",
                     |  "beds": 4
                     |}""".stripMargin
 
@@ -102,9 +102,9 @@ class ApotipposWorldRouterSpec extends Specification with Specs2RouteTest with M
                               |  "y": 444,
                               |  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                               |  "price": 1250000,
-                              |  "id": 0,
+                              |  "id": 1,
                               |  "baths": 3,
-                              |  "title": "Im�vel c�digo 1, com 5 quartos e 4 banheiros",
+                              |  "title": "Imovel codigo 1, com 5 quartos e 4 banheiros",
                               |  "beds": 4
                               |}""".stripMargin
         status === Created

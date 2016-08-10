@@ -66,7 +66,7 @@ trait PropertiesRegistry extends StrictLogging {
     SpotippoPiece(matchProvinces(x, y), x, y, None)
   })
 
-  private val properties = scala.collection.mutable.Map[Int, PropertyEntry]()
+  protected val properties = scala.collection.mutable.LinkedHashMap[Int, PropertyEntry]()
 
   def getProperty(id: Int) = {
     properties.get(id)
@@ -89,7 +89,7 @@ trait PropertiesRegistry extends StrictLogging {
   }
 
   def register(property: Property): PropertyEntry = {
-    register(property, properties.size)
+    register(property, if(properties.size > 0) properties.last._1 + 1 else 1)
   }
 
   def register(property: Property, id: Int): PropertyEntry = synchronized {
@@ -145,12 +145,12 @@ trait PropertiesRegistry extends StrictLogging {
     val properties = jsonString.parseJson.convertTo[List[PropertyRequestSample]]
 
     for (property <- properties) {
-      Try { register(property, property.id) } match {
+      Try { register(property) } match {
         case Failure(f) => {
-          logger.info(s"${f} Error on inserting property: ${property.toJson}")
+          logger.trace(s"${f} Error on inserting property: ${property.toJson}")
         }
         case Success(s) => {
-          logger.info(s"Inserted id ${property.id}")
+          logger.trace(s"Inserted id ${property.id}")
         }
       }
     }
@@ -220,7 +220,7 @@ object PropertiesSimpleRegistry extends PropertiesRegistry {
 
     val piece = land(property.x)(property.y)
 
-    if (piece.property.isDefined) {
+    if (piece.property.isDefined || properties.contains(id)) {
       throw RegistryPropertyColideException("Invalid (x, y) cordinates or square meters size, area compromised by existing property")
     } else {
       // assign the property to a SpotippoPiece

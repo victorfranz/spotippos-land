@@ -25,8 +25,10 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
   val service = createRoute()
 
   implicit def default(implicit system: ActorSystem) = RouteTestTimeout(30.second dilated)
-
+  
   "ApiRouter" should {
+    PropertiesSimpleRegistry.loadSample()
+    
     "return build info" >> {
       Get("/") ~> sealRoute(service) ~> check {
         val response = responseAs[String]
@@ -102,7 +104,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                               |  "y": 444,
                               |  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                               |  "price": 1250000,
-                              |  "id": 0,
+                              |  "id": 7982,
                               |  "baths": 3,
                               |  "title": "Imovel codigo 1, com 5 quartos e 4 banheiros",
                               |  "beds": 4
@@ -111,8 +113,6 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
       }
 
       "Reject post property on an area that already has a property" >> {
-
-        PropertiesSimpleRegistry.loadSample()
 
         val property = """{
                     |  "x": 222,
@@ -132,19 +132,19 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
       }
 
       "Get a property by id" >> {
-        Get("/properties/0") ~> sealRoute(service) ~> check {
+        Get("/properties/1") ~> sealRoute(service) ~> check {
           responseAs[String] === """{
-                              |  "x": 222,
-                              |  "squareMeters": 210,
-                              |  "provinces": ["Gode"],
-                              |  "y": 444,
-                              |  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                              |  "price": 1250000,
-                              |  "id": 0,
-                              |  "baths": 3,
-                              |  "title": "Imovel codigo 1, com 5 quartos e 4 banheiros",
-                              |  "beds": 4
-                              |}""".stripMargin
+                                  |  "x": 1257,
+                                  |  "squareMeters": 61,
+                                  |  "provinces": ["Jaby"],
+                                  |  "y": 928,
+                                  |  "description": "Laboris quis quis elit commodo eiusmod qui exercitation. In laborum fugiat quis minim occaecat id.",
+                                  |  "price": 643000,
+                                  |  "id": 1,
+                                  |  "baths": 2,
+                                  |  "title": "Imóvel código 1, com 3 quartos e 2 banheiros.",
+                                  |  "beds": 3
+                                  |}""".stripMargin
           status === OK
         }
 
@@ -251,7 +251,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                   |    "y": 444,
                                   |    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                   |    "price": 1250000,
-                                  |    "id": 0,
+                                  |    "id": 7982,
                                   |    "baths": 3,
                                   |    "title": "Imovel codigo 1, com 5 quartos e 4 banheiros",
                                   |    "beds": 4
@@ -270,7 +270,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 822,
                                 |    "description": "Laboris duis ut mollit fugiat excepteur cupidatat veniam anim laborum sunt pariatur culpa minim. Aliquip id magna do voluptate voluptate tempor exercitation ut laboris fugiat consequat ipsum mollit dolor.",
                                 |    "price": 535000,
-                                |    "id": 7513,
+                                |    "id": 7497,
                                 |    "baths": 1,
                                 |    "title": "Imóvel código 7513, com 2 quartos e 1 banheiros.",
                                 |    "beds": 2
@@ -289,7 +289,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 871,
                                 |    "description": "Esse non excepteur proident labore ad ad et elit ex non dolor consequat. Elit minim tempor irure veniam.",
                                 |    "price": 472000,
-                                |    "id": 2573,
+                                |    "id": 2569,
                                 |    "baths": 1,
                                 |    "title": "Imóvel código 2573, com 2 quartos e 1 banheiros.",
                                 |    "beds": 2
@@ -300,7 +300,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 858,
                                 |    "description": "Esse proident veniam aliqua nostrud culpa do proident eiusmod irure sit qui irure. Sunt sit officia voluptate eu dolore labore mollit incididunt cillum incididunt consequat proident adipisicing.",
                                 |    "price": 1847000,
-                                |    "id": 5067,
+                                |    "id": 5059,
                                 |    "baths": 4,
                                 |    "title": "Imóvel código 5067, com 5 quartos e 4 banheiros.",
                                 |    "beds": 5
@@ -311,7 +311,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 885,
                                 |    "description": "Velit non dolore eu magna pariatur reprehenderit aliquip enim ad veniam do. Ad ut elit dolor ea adipisicing incididunt cupidatat et reprehenderit sint.",
                                 |    "price": 1601000,
-                                |    "id": 2581,
+                                |    "id": 2576,
                                 |    "baths": 4,
                                 |    "title": "Imóvel código 2581, com 5 quartos e 4 banheiros.",
                                 |    "beds": 5
@@ -322,7 +322,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 891,
                                 |    "description": "Ea fugiat mollit nostrud eiusmod sint laboris officia. Ut nisi velit tempor exercitation ut.",
                                 |    "price": 936000,
-                                |    "id": 4005,
+                                |    "id": 3998,
                                 |    "baths": 3,
                                 |    "title": "Imóvel código 4005, com 4 quartos e 3 banheiros.",
                                 |    "beds": 4
@@ -333,7 +333,7 @@ class SimpleApotipposWorldRouterSpec extends Specification with Specs2RouteTest 
                                 |    "y": 873,
                                 |    "description": "Sunt Lorem cillum qui cupidatat minim irure veniam deserunt est adipisicing fugiat labore ullamco. Tempor non irure proident ipsum aliquip pariatur proident magna cupidatat id est Lorem.",
                                 |    "price": 575000,
-                                |    "id": 5377,
+                                |    "id": 5368,
                                 |    "baths": 1,
                                 |    "title": "Imóvel código 5377, com 2 quartos e 1 banheiros.",
                                 |    "beds": 2
