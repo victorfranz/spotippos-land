@@ -10,6 +10,7 @@
 FROM williamyeh/scala:2.11.4
 MAINTAINER Victor Franzonatto <victor.franzonatto@gmail.com>
 
+ENV _JAVA_OPTIONS "-Dfile.encoding=UTF8"
 
 RUN apt-get update  && \
     echo "==> Install git & helper tools..."  && \
