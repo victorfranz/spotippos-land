@@ -95,7 +95,6 @@ trait PropertiesRegistry extends StrictLogging {
   def register(property: Property, id: Int): PropertyEntry = synchronized {
     val offset = property.squareMeters / 2 - 1
 
-    // 1. create new PropertyEntry 
     val newProperty = PropertyEntry(property.x,
       property.y,
       property.title,
@@ -123,14 +122,14 @@ trait PropertiesRegistry extends StrictLogging {
 
   def matchProvinces(x: Int, y: Int, offset: Int): Seq[Province] = {
 
-    val bla = for {
+    val provinces = for {
       offsetX <- 0 to offset
       offsetY <- 0 to offset
     } yield {
       matchProvinces(x + offset, y + offset)
     }
 
-    bla.flatten.distinct
+    provinces.flatten.distinct
   }
 
   def loadSample() {
